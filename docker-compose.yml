@@ -1,0 +1,14 @@
+services:
+  cozy:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "3000:3000"
+    volumes:
+      - cozy-data:/app/data
+    environment:
+      NODE_ENV: production
+
+volumes:
+  cozy-data:
