@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App - Local Storage</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-top">
+        <h1>📝 Todo App</h1>
+        <button id="themeToggle" class="theme-toggle" title="Toggle dark mode">🌙</button>
+      </div>
+      <p class="subtitle">Stay organized with local storage</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Add Task Section -->
+      <section class="add-task-section">
+        <form id="addTaskForm" class="add-task-form">
+          <div class="form-group">
+            <input
+              type="text"
+              id="taskInput"
+              class="task-input"
+              placeholder="Add a new task..."
+              maxlength="100"
+              required
+            />
+            <button type="submit" class="btn btn-primary">Add Task</button>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="categorySelect">Category:</label>
+              <select id="categorySelect" class="category-select">
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Health">Health</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="dueDateInput">Due Date:</label>
+              <input type="date" id="dueDateInput" class="date-input" />
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- Search & Filter Section -->
+      <section class="filters-section">
+        <div class="search-box">
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search tasks..."
+            maxlength="50"
+          />
+        </div>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="active">Active</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="stats">
+        <div class="stat-item">
+          <span class="stat-label">Total:</span>
+          <span class="stat-value" id="totalTasks">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Active:</span>
+          <span class="stat-value" id="activeTasks">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Completed:</span>
+          <span class="stat-value" id="completedTasks">0</span>
+        </div>
+      </section>
+
+      <!-- Tasks List -->
+      <section class="tasks-section">
+        <div id="tasksList" class="tasks-list"></div>
+        <div id="emptyState" class="empty-state">
+          <p>✨ No tasks yet. Add one to get started!</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Actions -->
+    <footer class="footer">
+      <button id="exportBtn" class="btn btn-secondary" title="Export tasks as JSON">⬇️ Export</button>
+      <button id="importBtn" class="btn btn-secondary" title="Import tasks from JSON">⬆️ Import</button>
+      <button id="clearBtn" class="btn btn-danger" title="Clear all tasks">🗑️ Clear All</button>
+    </footer>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit Task</h2>
+        <button class="modal-close" id="closeModal">&times;</button>
+      </div>
+      <form id="editForm" class="modal-form">
+        <div class="form-group">
+          <label for="editTaskInput">Task:</label>
+          <input type="text" id="editTaskInput" class="task-input" required maxlength="100" />
+        </div>
+        <div class="form-group">
+          <label for="editCategorySelect">Category:</label>
+          <select id="editCategorySelect" class="category-select">
+            <option value="Work">Work</option>
+            <option value="Personal">Personal</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Health">Health</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editDueDateInput">Due Date:</label>
+          <input type="date" id="editDueDateInput" class="date-input" />
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" id="importFile" accept=".json" style="display: none" />
+
+  <script src="app.js"></script>
+</body>
+</html>
